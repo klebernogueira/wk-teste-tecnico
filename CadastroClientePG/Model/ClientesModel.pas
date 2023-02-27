@@ -6,6 +6,7 @@ uses Classes;
 type
    TClientesModel = class
       private
+         FId: Int32;
          FNatureza: Int8;
          FDocumento: string;
          FPrimeiroNome: string;
@@ -13,6 +14,9 @@ type
          FCEP: string;
          FMensagemErro: TStringList;
       public
+         property Id: Int32
+            read FId
+            write FId;
          property MensagemErro: TStringList
             read FMensagemErro
             write FMensagemErro;

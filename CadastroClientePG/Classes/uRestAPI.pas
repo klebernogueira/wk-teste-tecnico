@@ -41,6 +41,8 @@ begin
          //oCEPModel := TCEPModel.Create();
 
          oCEPModel := oJSON.JsonToObject<TCEPModel>(sJSON);
+         if (oCEPModel.cep = '') then
+            oCEPModel := nil;
 
       end;
 

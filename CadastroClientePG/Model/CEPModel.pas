@@ -6,6 +6,8 @@ uses Classes;
 type
    TCEPModel = class
       private
+         FidEndereco: Int32;
+         FidPessoa: Int32;
          Fcep: string;
          Flogradouro: string;
          Fcomplemento: string;
@@ -17,6 +19,8 @@ type
          Fddd: string;
          Fsiafi: string;
       public
+         property idEndereco: Int32 read FidEndereco write FidEndereco;
+         property idPessoa: Int32 read FidPessoa write FidPessoa;
          property cep: string read Fcep write Fcep;
          property logradouro: string read Flogradouro write Flogradouro;
          property complemento: string read FComplemento write Fcomplemento;

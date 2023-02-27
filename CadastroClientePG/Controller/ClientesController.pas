@@ -3,7 +3,7 @@ unit ClientesController;
 interface
 uses
    Classes, System.Generics.Collections, SysUtils,
-   System.Character, ClientesModel;
+   System.Character, ClientesModel, ClientesDAO;
 
 type
    TClientesController = class
@@ -23,11 +23,17 @@ type
             write FMensagemErro;
 
          // metodos
+         function Delete(
+               const oClientesModel: TClientesModel):
+            boolean;
          function Insert(
                const oClientesModel: TClientesModel):
             boolean;
          function InsertLote(
                olstClientesModel: TObjectList<TClientesModel>):
+            boolean;
+         function UpDate(
+               const oClientesModel: TClientesModel):
             boolean;
    end;
 
@@ -85,6 +91,12 @@ begin
       oClientesModel.SobreNome :=
          oClientesModel.SobreNome.Trim();
 
+      if (oClientesModel.Id < 1) then begin
+         oListErros.Add(
+            'Código deve ser MAIOR que 1'
+         );
+
+      end;
       if (not (oClientesModel.Natureza in [1..99])) then begin
          oListErros.Add(
             'Natureza deve Conter um Número de 1 a 99'
@@ -128,22 +140,50 @@ begin
             FTClientesDadosInvalidos := TObjectList<TClientesModel>.Create();
          FTClientesDadosInvalidos.Add(oClientesModel); // lista de clientes nao validados corretamente
 
-      end;
+      end
+      else
+            Result := true;
 
+   end;
+
+end;
+
+function TClientesController.Delete(
+      const oClientesModel: TClientesModel):
+   boolean;
+var
+   oClientesDAO : TClientesDAO;
+begin
+   Result := false;
+   FMensagemErro := '';
+   FTClientesDadosInvalidos := nil;
+   if (oClientesModel.Id < 1) then begin
+      FMensagemErro := 'Código deve ser MAIOR que 1';
+
+   end
+   else begin
+       oClientesDAO := TClientesDAO.Create();
+       Result :=
+          oClientesDAO.Delete(oClientesModel);
+       if (not Result) then
+          FMensagemErro := oClientesDAO.Mensagem;
 
    end;
 
 end;
 
 function TClientesController.Insert(const oClientesModel: TClientesModel): boolean;
+var
+   oClientesDAO : TClientesDAO;
 begin
    Result := false;
 
    FMensagemErro := '';
    FTClientesDadosInvalidos := nil;
-   if (not ValidarClienteInsert(oClientesModel)) then begin
-
-      // enviar para model clientes
+   if (ValidarClienteInsert(oClientesModel)) then begin
+       oClientesDAO := TClientesDAO.Create();
+       if (not oClientesDAO.Insert(oClientesModel)) then
+          FMensagemErro := oClientesDAO.Mensagem;
 
    end;
 
@@ -153,8 +193,9 @@ function TClientesController.InsertLote(
       olstClientesModel: TObjectList<TClientesModel>):
    boolean;
 var
-  oListClientes: TObjectList<TClientesModel>;
-  iItem: Integer;
+   oClientesDAO : TClientesDAO;
+   oListClientes: TObjectList<TClientesModel>;
+   iItem: Integer;
 begin
    Result := false;
 
@@ -170,6 +211,7 @@ begin
 
    end
    else begin
+      oClientesDAO := TClientesDAO.Create();
       oListClientes := TObjectList<TClientesModel>.Create();
       for iItem := 0 to Pred(olstClientesModel.Count) do begin
          if (ValidarClienteInsert(olstClientesModel[iItem])) then begin
@@ -181,13 +223,34 @@ begin
                ((iItem > 0) and (iItem mod 20 = 0)) or
                (iItem = Pred(olstClientesModel.Count))
             ) then begin
-            // enviar para model clientes
+            Result :=
+               oClientesDAO.InsertLote(olstClientesModel);
             FreeAndNil(oListClientes);
             oListClientes := TObjectList<TClientesModel>.Create();
 
          end;
 
       end;
+
+   end;
+
+end;
+
+function TClientesController.Update(
+      const oClientesModel: TClientesModel):
+   boolean;
+var
+   oClientesDAO : TClientesDAO;
+begin
+   Result := false;
+   FMensagemErro := '';
+   FTClientesDadosInvalidos := nil;
+   if (ValidarClienteInsert(oClientesModel)) then begin
+       oClientesDAO := TClientesDAO.Create();
+       Result :=
+          oClientesDAO.UpDate(oClientesModel);
+       if (not Result) then
+          FMensagemErro := oClientesDAO.Mensagem;
 
    end;
 

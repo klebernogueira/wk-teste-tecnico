@@ -104,13 +104,30 @@
         <DCCReference Include="View\uFormMensagem.pas">
             <Form>FormMensagem</Form>
         </DCCReference>
-        <DCCReference Include="Controller\ClientesController.pas"/>
-        <DCCReference Include="Model\ClientesModel.pas"/>
+        <DCCReference Include="Controller\ClientesController.pas">
+            <Form>$R *.res</Form>
+        </DCCReference>
+        <DCCReference Include="Model\ClientesModel.pas">
+            <Form>$R *.res</Form>
+        </DCCReference>
         <DCCReference Include="Model\CEPModel.pas">
             <Form>$R *.res</Form>
         </DCCReference>
-        <DCCReference Include="Classes\uRestAPI.pas"/>
-        <DCCReference Include="View\EnderecosModel.pas"/>
+        <DCCReference Include="Classes\uRestAPI.pas">
+            <Form>$R *.res</Form>
+        </DCCReference>
+        <DCCReference Include="View\EnderecosModel.pas">
+            <Form>$R *.res</Form>
+        </DCCReference>
+        <DCCReference Include="DAO\ClientesDAO.pas">
+            <Form>$R *.res</Form>
+        </DCCReference>
+        <DCCReference Include="DAO\uDM.pas">
+            <Form>DataModuleBD</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="DAO\CEPDAO.pas"/>
+        <DCCReference Include="Controller\CEPController.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

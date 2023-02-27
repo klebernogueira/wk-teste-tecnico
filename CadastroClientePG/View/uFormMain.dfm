@@ -3,7 +3,7 @@ object FormMain: TFormMain
   Top = 0
   BorderStyle = bsSingle
   Caption = 'FormMain'
-  ClientHeight = 211
+  ClientHeight = 237
   ClientWidth = 457
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,91 +17,124 @@ object FormMain: TFormMain
   TextHeight = 13
   object LabelDocumento: TLabel
     Left = 8
-    Top = 39
+    Top = 74
     Width = 54
     Height = 13
     Caption = 'Documento'
   end
   object LabelNatureza: TLabel
     Left = 8
-    Top = 9
+    Top = 44
     Width = 44
     Height = 13
     Caption = 'Natureza'
   end
   object LabelPrimeiroNome: TLabel
     Left = 8
-    Top = 70
+    Top = 105
     Width = 68
     Height = 13
     Caption = 'Primeiro Nome'
   end
   object LabelSobreNome: TLabel
     Left = 8
-    Top = 100
+    Top = 135
     Width = 55
     Height = 13
     Caption = 'SobreNome'
   end
   object LabelCEP: TLabel
     Left = 8
-    Top = 132
+    Top = 167
     Width = 19
     Height = 13
     Caption = 'CEP'
   end
+  object LabelId: TLabel
+    Left = 8
+    Top = 13
+    Width = 33
+    Height = 13
+    Caption = 'C'#243'digo'
+  end
   object ButtonImportar: TButton
     Left = 364
-    Top = 168
+    Top = 206
     Width = 75
     Height = 25
     Caption = 'Importar'
-    TabOrder = 4
+    TabOrder = 9
     OnClick = ButtonImportarClick
   end
   object EditDocumento: TEdit
     Left = 79
-    Top = 36
+    Top = 71
     Width = 141
     Height = 21
-    TabOrder = 1
+    TabOrder = 2
   end
   object EditNatureza: TEdit
     Left = 79
-    Top = 6
+    Top = 41
     Width = 34
     Height = 21
-    TabOrder = 0
+    TabOrder = 1
     OnKeyUp = EditNaturezaKeyUp
   end
   object EditPrimeiroNome: TEdit
     Left = 79
-    Top = 67
-    Width = 360
-    Height = 21
-    TabOrder = 2
-  end
-  object EditSobreNome: TEdit
-    Left = 79
-    Top = 97
+    Top = 102
     Width = 360
     Height = 21
     TabOrder = 3
   end
+  object EditSobreNome: TEdit
+    Left = 79
+    Top = 132
+    Width = 360
+    Height = 21
+    TabOrder = 4
+  end
   object ButtonInserir: TButton
     Left = 8
-    Top = 168
+    Top = 206
     Width = 55
     Height = 25
     Caption = 'Inserir'
-    TabOrder = 5
+    TabOrder = 6
     OnClick = ButtonImportarClick
   end
   object EditCEP: TEdit
     Left = 79
-    Top = 129
+    Top = 164
     Width = 82
     Height = 21
-    TabOrder = 6
+    TabOrder = 5
+  end
+  object EditId: TEdit
+    Left = 79
+    Top = 10
+    Width = 141
+    Height = 21
+    TabOrder = 0
+    OnKeyUp = EditIdKeyUp
+  end
+  object ButtonDeletar: TButton
+    Left = 136
+    Top = 206
+    Width = 55
+    Height = 25
+    Caption = 'Deletar'
+    TabOrder = 8
+    OnClick = ButtonDeletarClick
+  end
+  object ButtonAtualizar: TButton
+    Left = 72
+    Top = 206
+    Width = 55
+    Height = 25
+    Caption = 'Atualizar'
+    TabOrder = 7
+    OnClick = ButtonAtualizarClick
   end
 end
